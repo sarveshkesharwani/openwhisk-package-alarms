@@ -10,6 +10,10 @@ function constructTriggerID(triggerData) {
     if (triggerData.apikey) {
         triggerID = `${triggerData.apikey}/${triggerID}`;
     }
+    //dateInfo would contain either date (once) or startDate (interval)
+    if (triggerData.dateInfo) {
+        triggerID = `${triggerID}/${triggerData.dateInfo}`
+    }
     return triggerID;
 }
 

@@ -14,11 +14,18 @@ function main(params) {
     }
 
     var triggerParts = common.parseQName(params.triggerName);
+    var dateInfo = "";
+    if (params.date) {
+        dateInfo = params.date;
+    } else if (params.startDate) {
+        dateInfo = params.startDate;
+    }
     var triggerData = {
         apikey: params.authKey,
         name: triggerParts.name,
         namespace: triggerParts.namespace,
         additionalData: common.constructObject(params.additionalData),
+        dateInfo: params.date ? params.date : params.startDate ? params.startDate : "",
     };
     var triggerID = config.constructTriggerID(triggerData);
 

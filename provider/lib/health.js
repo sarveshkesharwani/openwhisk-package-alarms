@@ -95,6 +95,12 @@ module.exports = function(logger, utils) {
         .then((info) => {
             logger.info(method, triggerID, info);
             var newTrigger = createAlarmTrigger(triggerID, apikey, alarmType);
+            if (newTrigger.date) {
+                triggerID = `${triggerID}/${newTrigger.date}`;
+            } else if (newTrigger.startDate) {
+                triggerID = `${triggerID}/${newTrigger.startDate}`;
+            }
+            logger.info(method, triggerID, info);
             createTriggerInDB(triggerID, newTrigger);
         })
         .catch(err => {
